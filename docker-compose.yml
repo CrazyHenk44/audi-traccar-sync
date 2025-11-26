@@ -1,0 +1,18 @@
+services:
+  audi-sync:
+    build: .
+    container_name: audi-traccar-sync
+    restart: unless-stopped
+    network_mode: "host"  # Use host network to access Traccar on localhost
+    environment:
+      - AUDI_USER=${AUDI_USER}
+      - AUDI_PASSWORD=${AUDI_PASSWORD}
+      - AUDI_COUNTRY=${AUDI_COUNTRY:-DE}
+      - TRACCAR_URL=${TRACCAR_URL:-http://localhost:5055}
+      - DEVICE_ID=${DEVICE_ID:-audi_ev}
+      - SYNC_INTERVAL=${SYNC_INTERVAL:-300}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
