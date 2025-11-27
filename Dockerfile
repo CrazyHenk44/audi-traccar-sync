@@ -22,9 +22,9 @@ RUN pip install --no-cache-dir \
 COPY audi_sync_daemon.py /app/
 COPY homeassistant_stub.py /app/
 
-# Set environment variables for configuration
-ENV TRACCAR_URL=http://host.docker.internal:5055 \
-    DEVICE_ID=audi_ev \
-    SYNC_INTERVAL=300
+# Set environment variables defaults
+ENV DEVICE_ID=audi_ev \
+    SYNC_INTERVAL=300 \
+    AUDI_COUNTRY=DE
 
 CMD ["python", "-u", "audi_sync_daemon.py"]
